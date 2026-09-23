@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR" className={`${plusJakartaSans.variable} dark scroll-smooth`}>
       <head>
-        {/* Meta Pixel Code */}
+        {/* 1. Meta Pixel Code (ID: 1107957032177054) */}
         <Script id="meta-pixel" strategy="afterInteractive">
           {`
             !function(f,b,e,v,n,t,s)
@@ -43,9 +43,65 @@ export default function RootLayout({
             width="1"
             style={{ display: 'none' }}
             src="https://www.facebook.com/tr?id=1107957032177054&ev=PageView&noscript=1"
-            alt=""
+            alt="Meta Pixel"
           />
         </noscript>
+        {/* End Meta Pixel Code */}
+
+        {/* 2. Script de Rastreamento de Visitas e UTMs (/api/track-visit) */}
+        <Script id="prosperus-track-visit" strategy="afterInteractive">
+          {`
+            (function() {
+              try {
+                var urlParams = new URLSearchParams(window.location.search);
+                var trackingData = {
+                  page_url: window.location.href,
+                  pathname: window.location.pathname,
+                  referrer: document.referrer || '',
+                  utm_source: urlParams.get('utm_source') || '',
+                  utm_medium: urlParams.get('utm_medium') || '',
+                  utm_campaign: urlParams.get('utm_campaign') || '',
+                  utm_content: urlParams.get('utm_content') || '',
+                  utm_term: urlParams.get('utm_term') || '',
+                  vid: urlParams.get('vid') || '',
+                  src: urlParams.get('src') || '',
+                  sck: urlParams.get('sck') || '',
+                  screen_resolution: window.screen ? window.screen.width + 'x' + window.screen.height : '',
+                  timestamp: new Date().toISOString()
+                };
+
+                var endpoint = '/api/track-visit';
+
+                if (navigator.sendBeacon) {
+                  var blob = new Blob([JSON.stringify(trackingData)], { type: 'application/json' });
+                  navigator.sendBeacon(endpoint, blob);
+                } else {
+                  fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(trackingData),
+                    keepalive: true
+                  }).catch(function(err) {
+                    console.error('Tracking fetch error:', err);
+                  });
+                }
+              } catch(e) {
+                console.error('Tracking script error:', e);
+              }
+            })();
+          `}
+        </Script>
+
+        {/* Microsoft Clarity Code */}
+        <Script id="microsoft-clarity" strategy="afterInteractive">
+          {`
+            (function(c,l,a,r,i,t,y){
+                c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+            })(window, document, "clarity", "script", "yme8rmsnp3");
+          `}
+        </Script>
       </head>
       <body className="bg-[#0B0F19] text-slate-100 antialiased selection:bg-emerald-500 selection:text-slate-950 min-h-screen">
         {children}
