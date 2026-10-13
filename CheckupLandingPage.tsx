@@ -32,7 +32,7 @@ interface CheckupLandingPageProps {
 }
 
 export default function CheckupLandingPage({
-  checkoutUrl = 'https://payfast.greenn.com.br/27s9n8q?b_id_1=9ujy5kr&src=251fe2fa6aca41a0a33fd893ea936f29&sck=251fe2fa6aca41a0a33fd893ea936f29&vid=251fe2fa6aca41a0a33fd893ea936f29',
+  checkoutUrl = 'https://payfast.greenn.com.br/27s9n8q?b_id_1=9ujy5kr&src=prosperus_funil_02&sck=prosperus_funil_02&vid=prosperus_funil_02',
 }: CheckupLandingPageProps) {
   const whatsappUrl = "https://wa.me/5562994560265?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Checkup%20Financeiro%20da%20Prosperus.";
 
